@@ -1,0 +1,202 @@
+/* Estilos para la página de login */
+.bodyLogin{
+  background-image: url('../img/fondo.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #212529;
+  margin: 60px;
+}
+.formulario{
+    background-color: #ffffff;
+    padding: 140px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    text-align: center
+}
+input{
+    padding: 7px;
+    margin-bottom: 20px;
+}
+.col-md{
+    display: flex;
+    justify-content: center;
+}
+
+.form button {
+  align-self: flex-end;
+}
+
+
+.input:focus {
+  outline: none;
+}
+
+.inputForm:focus-within {
+  border: 1.5px solid #2d79f3;
+}
+
+.span {
+  font-size: 14px;
+  margin-left: 5px;
+  color: #2d79f3;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.button-submit {
+  margin: 20px 0 10px 0;
+  background-color: #151717;
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  height: 50px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.btn {
+  margin-top: 10px;
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  gap: 10px;
+  border: 1px solid #ededef;
+  
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.btn:hover {
+  border: 1px solid #2d79f3;
+  ;
+  background-color: #2d79f3;
+  color: white;
+}
+
+button svg {
+  fill: #327cdb;
+  height: 25px;
+  width: 25px;
+}
+
+button:hover svg {
+  fill: white;
+}
+
+
+/* Estilos para la página de home */
+
+.bodyHome{
+  background-color: #ffffff;
+  color: #000000;
+  margin: 60px;
+}
+
+.navbar {
+  background-color: #f2d6d3;
+  border-radius: 10px;
+  padding: 10px 25px;
+  height: 70px;
+}
+
+.navbar-nav, .nav-link, .nav-item {
+    color: #000000;
+}
+
+.btn-agregar{
+  width: 200px;
+  background-color: #e7a39c;
+  color: #000000;
+}
+
+.card-img-top{
+  height: 300px;
+  object-fit: cover;
+}
+
+
+
+/* Estilos para la página de libros */
+
+.bodyLibros{
+  background-color: #975141;
+  color: #000000;
+  padding: 60px;
+}
+.card{
+  margin-left: 50px;
+}
+
+.content{
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px
+}
+
+/* Estilos de la barra de navegación de libros */
+.btn-outline-success {
+  background-color: #e7a39c;
+  border: 1px solid #000000;
+  color: #000000;
+  border-radius: 5px;
+  width: 150px;
+  height: 35px;
+  margin-top: 1px; 
+  cursor: pointer;
+}
+
+.form-control {
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  margin-top: 20px;
+  width: 250px;
+}
+
+/* TABLAS */
+table {
+    width: 95%;
+    margin: 10px auto;
+    border-collapse: collapse;
+    background: #fff7f5;
+}
+
+td, th {
+    padding: 10px;
+    border: 1px solid #e8c2bf;
+}
+
+th {
+    background: #f2d6d3;
+}
+
+
+/*FORMULARIOS */
+.registrar {
+    width: 100%;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+    color: #6a4b45;
+}
+
+.nombre, .autor, .descrip, .genero{
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #e5c4c1;
+  border-radius: 5px;
+}
+

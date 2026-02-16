@@ -1,16 +1,9 @@
 body {
     font-family: "Segoe UI", Arial;
-    background-color: #fdeee9;
-    margin: 0;
-    padding: 20px;
-    color: #444;
+    background-color: #ffffff;
+    padding: 60px;
 }
 
-/* TITULOS */
-h1, h4 {
-    text-align: center;
-    color: #d17a6c;
-}
 
 /*FORMULARIOS */
 form {
@@ -19,7 +12,7 @@ form {
     background: #ffffff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 label {
@@ -28,7 +21,9 @@ label {
     color: #6a4b45;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
     width: 100%;
     padding: 8px;
     margin-top: 5px;
@@ -44,7 +39,8 @@ table {
     background: #fff7f5;
 }
 
-td, th {
+td,
+th {
     padding: 10px;
     border: 1px solid #e8c2bf;
 }
@@ -73,4 +69,23 @@ button:hover {
     width: 120px;
     display: block;
     margin: 0 auto 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+img {
+    display: block;
 }

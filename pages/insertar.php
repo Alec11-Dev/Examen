@@ -2,10 +2,11 @@
 <html>
 
 <head>
-    <title>Insertar</title>
+    <title>Insertar Libro</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/estilos.css">
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
 </head>
 
 <body>
@@ -13,7 +14,7 @@
     <!--Se agrego el enctype para permitir la subida de archivos -->
     <form method="post" enctype="multipart/form-data">
         <?php
-        include("conexion.php");
+        include("../ValidationData/conexion.php");
 
         echo "<label for='nombre'>Nombre:</label>";
         echo "<input type='text' id='nombre' name='nombre' required style='text-transform: uppercase;'>";
@@ -38,6 +39,7 @@
         echo "<br>";
         echo "<input type='submit' name='insertar' value='Insertar'>";
         echo "<button type='button' onclick=\"window.location.href='Libros.php'\">Volver al inicio</button>";
+        echo "<button type='button' onclick=\"window.location.href='insertarGenero.php'\">Ingresar un nuevo genero</button>";
         ?>
     </form>
 
@@ -45,7 +47,10 @@
     <?php
     // Se lleva acabo el proceso de 'insertar' atraves del metodo POST
     if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['insertar'])) {
-        include("conexion.php");
+        include("../ValidationData/conexion.php");
+
+        // Habilitar el reporte de errores de MySQLi para que lance excepciones
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
         // Recibe los datos del formulario para insertarlos en la BD
         $Nombre = $_POST['nombre'];
@@ -60,47 +65,45 @@
             $extension = pathinfo($nombre_archivo, PATHINFO_EXTENSION); // Obtiene la extension
             // Nombre único para evitar sobrescribir (timestamp + rand)
             $nombre_unico = 'img_' . time() . '_' . rand(1000, 9999) . '.' . $extension; // Nombre único para evitar colisiones formado por timestamp + random
-            $ruta = "img_upload/" . $nombre_unico; // Ruta del destino de la imagen
+            $ruta = "../img_upload/" . $nombre_unico; // Ruta del destino de la imagen
 
             // Esto nos permite evitar errores si el directorio no existe
             // Si no existe, lo crea con permisos 0777 (lectura, escritura, ejecución para todos)
-            if (!file_exists('img_upload/')) {
-                mkdir('img_upload/', 0777, true);
+            if (!file_exists('../img_upload/')) {
+                mkdir('../img_upload/', 0777, true);
             }
 
             // Se usa in if para mover el archivo subido a la nueva ruta
             if (move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta)) {
-                // Inserta en tabla 'libro'
-                $sql = "INSERT INTO libro (nombre_libro, autor, descripcion, imagen_ruta) VALUES (?, ?, ?, ?)";
-                if ($stmt = $conexion->prepare($sql)) {
-                    $stmt->bind_param("ssss", $Nombre, $Autor, $Descripcion, $ruta); // Vincula los parametros recibidos del formulario con el bind_param
-                    // Ejecuta la insercion y verifica si fue exitoso
-                    if ($stmt->execute()) {
-                        $id_libro = $conexion->insert_id;
-                        $stmt->close();
+                try {
+                    // Inserta en tabla 'libro'
+                    $sql = "INSERT INTO libro (nombre_libro, autor, descripcion, imagen_ruta) VALUES (?, ?, ?, ?)";
+                    $stmt = $conexion->prepare($sql);
+                    $stmt->bind_param("ssss", $Nombre, $Autor, $Descripcion, $ruta);
+                    $stmt->execute();
 
-                        // Ahora se insertan las relaciones en 'librogenero'
-                        // Aqui se usara principalmente el array $ids_genero para insertar multiples filas y para lograrlo usamos un foreach
-                        $sql2 = "INSERT INTO librogenero (fk_id_genero, fk_id_libro) VALUES (?, ?)"; // Consulta para insertar en librogenero
-                        if ($stmt2 = $conexion->prepare($sql2)) { // Prepara la consulta
-                            foreach ($ids_genero as $id_genero) { // Recorre cada id del genero seleccionado y almacenado en el array 
-                                $stmt2->bind_param("ii", $id_genero, $id_libro); // Vincula los parametros: id del genero y id del libro recien insertado
-                                $stmt2->execute();
-                            }
-                            echo '<p style="color: green;">Registro creado correctamente. ID del libro: ' . $id_libro . '</p>';
-                            $stmt2->close();
-                        } else {
-                            echo '<p style="color: red;">Error al preparar inserción de géneros: ' . $conexion->error . '</p>';
-                        }
-                    } else {
-                        echo '<p style="color: red;">Error al insertar libro: ' . $stmt->error . '</p>';
-                        // El unlink borra el archivo si falla la insercion y evitamos imagenes que no tienen libro asociado
-                        unlink($ruta);
+                    $id_libro = $conexion->insert_id;
+                    $stmt->close();
+
+                    // Ahora se insertan las relaciones en 'librogenero'
+                    $sql2 = "INSERT INTO librogenero (fk_id_genero, fk_id_libro) VALUES (?, ?)";
+                    $stmt2 = $conexion->prepare($sql2);
+                    foreach ($ids_genero as $id_genero) {
+                        $stmt2->bind_param("ii", $id_genero, $id_libro);
+                        $stmt2->execute();
                     }
-                } else {
-                    echo '<p style="color: red;">Error al preparar inserción: ' . $conexion->error . '</p>';
-                    // Se vuelve a usar el unlink para borrar la imagen en caso de error por parte del prepare
+                    echo '<p style="color: green;">Registro creado correctamente. ID del libro: ' . $id_libro . '</p>';
+                    $stmt2->close();
+                } catch (mysqli_sql_exception $e) {
+                    // El unlink borra el archivo si falla la insercion y evitamos imagenes que no tienen libro asociado
                     unlink($ruta);
+                    // Se comprueba si el error es por una entrada duplicada (código 1062)
+                    if ($e->getCode() == 1062) {
+                        echo '<script>alert("Error, este libro ya existe.");</script>';
+                    } else {
+                        // Para cualquier otro error de base de datos, muestra el mensaje de la excepción
+                        echo '<p style="color: red;">Error en la base de datos: ' . $e->getMessage() . '</p>';
+                    }
                 }
             } else {
                 echo '<p style="color: red;">Error al mover la imagen. Verifica permisos en img_upload/.</p>';
