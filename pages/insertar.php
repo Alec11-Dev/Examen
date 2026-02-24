@@ -9,37 +9,50 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 </head>
 
-<body>
-    <h1>Insertar</h1>
+<body class="container mt-5">
+    <h1 class="mb-4">Insertar Libro</h1>
     <!--Se agrego el enctype para permitir la subida de archivos -->
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" class="card p-4 shadow-sm">
         <?php
         include("../ValidationData/conexion.php");
 
-        echo "<label for='nombre'>Nombre:</label>";
-        echo "<input type='text' id='nombre' name='nombre' required style='text-transform: uppercase;'>";
-        echo "<br>";
-        echo "<label for='autor'>Autor:</label>";
-        echo "<input type='text' id='autor' name='autor' required pattern='[A-Za-záéíóúÁÉÍÓÚñÑ ]+'>";
-        echo "<br>";
-        echo "<label for='descripcion'>Descripción:</label>";
-        echo "<textarea id='descripcion' name='descripcion' required></textarea>";
-        echo "<br>";
-        echo "<select name='id_genero[]' id='id_genero' multiple required>"; // En este caso, como se permitiran seleccionar multiples generos, se agrega un array [] para guardar los ids 
+        echo "<div class='mb-3'>";
+        echo "<label for='nombre' class='form-label'>Nombre:</label>";
+        echo "<input type='text' class='form-control' id='nombre' name='nombre' required style='text-transform: uppercase;'>";
+        echo "</div>";
+        
+        echo "<div class='mb-3'>";
+        echo "<label for='autor' class='form-label'>Autor:</label>";
+        echo "<input type='text' class='form-control' id='autor' name='autor' required pattern='[A-Za-záéíóúÁÉÍÓÚñÑ ]+'>";
+        echo "</div>";
+        
+        echo "<div class='mb-3'>";
+        echo "<label for='descripcion' class='form-label'>Descripción:</label>";
+        echo "<textarea class='form-control' id='descripcion' name='descripcion' required></textarea>";
+        echo "</div>";
+        
+        echo "<div class='mb-3'>";
+        echo "<label for='id_genero' class='form-label'>Géneros:</label>";
+        echo "<select class='form-select' name='id_genero[]' id='id_genero' multiple required>"; 
         $sql = "SELECT id_genero, nombre_genero FROM genero"; 
         $result = mysqli_query($conexion, $sql);
-        // Con el while se generan las opciones del select, una por cada genero en la tabla
         while ($row = mysqli_fetch_assoc($result)) { 
-            // En el value se guarda el id del genero para posteriormente usarlo a la hora insertar en la tabla librogenero
             echo "<option value='" . $row['id_genero'] . "'>" . $row['nombre_genero'] . "</option>";
         }
         echo "</select>";
-        echo "<br>";
-        echo "<input type='file' name='imagen' accept='image/*' required>";
-        echo "<br>";
-        echo "<input type='submit' name='insertar' value='Insertar'>";
-        echo "<button type='button' onclick=\"window.location.href='Libros.php'\">Volver al inicio</button>";
-        echo "<button type='button' onclick=\"window.location.href='insertarGenero.php'\">Ingresar un nuevo genero</button>";
+        echo "<div class='form-text'>Usa Ctrl para seleccionar múltiples.</div>";
+        echo "</div>";
+        
+        echo "<div class='mb-3'>";
+        echo "<label class='form-label'>Imagen:</label>";
+        echo "<input type='file' class='form-control' name='imagen' accept='image/*' required>";
+        echo "</div>";
+        
+        echo "<div class='d-grid gap-2 d-md-block'>";
+        echo "<input type='submit' name='insertar' value='Insertar' class='btn btn-primary me-2'>";
+        echo "<button type='button' class='btn btn-secondary me-2' onclick=\"window.location.href='Libros.php'\">Volver al inicio</button>";
+        echo "<button type='button' class='btn btn-info' onclick=\"window.location.href='insertarGenero.php'\">Ingresar un nuevo genero</button>";
+        echo "</div>";
         ?>
     </form>
 

@@ -12,7 +12,7 @@
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     align-items: center;
-    text-align: center
+    text-align: center;
 }
 input{
     padding: 7px;
@@ -21,6 +21,19 @@ input{
 .col-md{
     display: flex;
     justify-content: center;
+}
+
+.container-md{
+    display: flex;
+    justify-content: center;
+}
+
+.formulario2{
+    background-color: #ffffff;
+    padding: 140px;
+    border-radius: 15px;
+    align-items: center;
+    text-align: center;
 }
 
 .form button {
@@ -199,4 +212,3 @@ label {
   border: 1px solid #e5c4c1;
   border-radius: 5px;
 }
-

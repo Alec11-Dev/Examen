@@ -1,3 +1,13 @@
+<?php
+session_start();
+include('../ValidationData/conexion.php');
+if(isset($_SESSION['email']) != ""){
+    $nameUser = $_SESSION['usuario'];
+    $email = $_SESSION['email'];
+?>
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -19,7 +29,7 @@
         echo "<input type='text' id='genero' name='genero' required>";
         echo "<br>";
         echo "<input type='submit' name='insertar' value='Insertar'>";
-        echo "<button type='button' onclick=\"window.location.href='insertar.php'\">Volver al registro</button>";
+        echo "<button type='button' onclick=\"window.location.href='../pages/menu.php'\">Volver al registro</button>";
         ?>
     </form>
 
@@ -47,3 +57,12 @@
     ?>
 </body>
 </html>
+
+<?php 
+} else{
+?>
+    <script type="text/javascript">
+        location.href = "../ValidationData/cerrar.php";
+    </script>
+<?php 
+}

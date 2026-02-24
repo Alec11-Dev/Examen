@@ -18,9 +18,8 @@ if($row=mysqli_fetch_assoc($QueryResult)){
     $_SESSION['email'] = $row['email'];
     $_SESSION['id_usuario'] = $row['id_usuario'];
     $_SESSION['usuario'] = $row['usuario'];
-    $_SESSION['id'] = $row['id'];
 
-    echo '<meta http-equiv="refresh" content = "0; url=../pages/Libros.php">';
+    echo '<meta http-equiv="refresh" content = "0; url=../pages/menu.php">';
 
 
 }

@@ -5,7 +5,7 @@ include('../ValidationData/conexion.php');
 if (isset($_SESSION['email']) != "") { //iset parametros para tu inicio de sesion, permite incializar y verificar si una función tiene datos
     $email = $_SESSION['email'];
     $nameUser = $_SESSION['usuario'];
-    $idUser = $_SESSION['id'];
+    $idUser = $_SESSION['id_usuario'];
 ?>
 
     <!DOCTYPE html>
@@ -32,10 +32,10 @@ if (isset($_SESSION['email']) != "") { //iset parametros para tu inicio de sesio
                             <a class="nav-link" href="../pages/Libros.php">Libros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" s href="../ValidationData/cerrar.php" onclick="return confirm('¿Estas seguro de cerrar sesión?');">Cerrar sesión</a>
+                            <a class="nav-link" href="../ValidationData/cerrar.php" onclick="return confirm('¿Estas seguro de cerrar sesión?');">Cerrar sesión</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-disabled="true">Rol asignado: <strong></strong></a>
+                            <a class="nav-link" href="../ValidationData/eliminar_cuenta.php" onclick="return confirm('¿Estás seguro de que deseas eliminar tu cuenta permanentemente? Esta acción no se puede deshacer.');" style="color: #dc3545;">Eliminar cuenta</a>
                         </li>
                     </ul>
                     <form class="d-flex justify-content-end align-items-center" role="search" onsubmit="return false;">
@@ -352,6 +352,7 @@ if (isset($_SESSION['email']) != "") { //iset parametros para tu inicio de sesio
         myfuntion();
         ?>
         <script src="../js/bootstrap.bundle.min.js"></script>
+        
         <script>
             document.getElementById('searchInput').addEventListener('input', function() {
                 let filter = this.value.toLowerCase();

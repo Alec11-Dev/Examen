@@ -79,9 +79,9 @@ if (isset($_POST['actualizar'])) {
     <title>Editar Libro</title>
 </head>
 
-<body>
+<body class="container mt-5">
 
-    <h2>Editar Libro</h2>
+    <h2 class="mb-4">Editar Libro</h2>
 
     <?php
     // Cargar datos del libro para editar
@@ -100,46 +100,50 @@ if (isset($_POST['actualizar'])) {
 
             // Usamos htmlspecialchars para prevenir XSS
             echo "
-            <form method='POST' action='FormularioEditar.php' enctype='multipart/form-data'>
+            <form method='POST' action='FormularioEditar.php' enctype='multipart/form-data' class='card p-4 shadow'>
                 <input type='hidden' name='id_libro' value='" . htmlspecialchars($fila['id_libro']) . "'>
                 <input type='hidden' name='ruta_antigua' value='" . htmlspecialchars($fila['imagen_ruta']) . "'>
                 
-                <table border='1' cellpadding='8'>
-                    <tr>
-                        <th>Campo</th>
-                        <th>Valor</th>
-                    </tr>
-                    <tr>
-                        <td>ID</td>
-                        <td>" . htmlspecialchars($fila['id_libro']) . "</td>
-                    </tr>
-                    <tr>
-                        <td>Nombre del libro</td>
-                        <td><input type='text' name='nombre_libro' value='" . htmlspecialchars($fila['nombre_libro']) . "' required></td> 
-                    </tr>
-                    <tr>
-                        <td>Autor</td>
-                        <td><input type='text' name='autor' value='" . htmlspecialchars($fila['autor']) . "' required pattern='[A-Za-záéíóúÁÉÍÓÚñÑ ]+'></td>
-                    </tr>
-                    <tr>
-                        <td>Descripción</td>
-                        <td><textarea name='descripcion' required>" . htmlspecialchars($fila['descripcion']) . "</textarea></td>
-                    </tr>
-                    <tr>
-                        <td>Género(s)</td>
-                        <td>" . htmlspecialchars($fila['generos']) . " <i>(No editable aquí)</i></td>
-                    </tr>
-                    <tr>
-                        <td>Portada Actual</td>
-                        <td><img src='" . htmlspecialchars($fila['imagen_ruta']) . "' alt='Portada' width='170' height='240'></td>
-                    </tr>
-                    <tr>
-                        <td>Cambiar imagen (opcional)</td>
-                        <td><input type='file' name='imagen' accept='image/*'></td>
-                    </tr>
-                </table>
-                <br>
-                <button type='submit' name='actualizar'>Guardar Cambios</button>
+                <div class='mb-3 row'>
+                    <label class='col-sm-2 col-form-label fw-bold'>ID</label>
+                    <div class='col-sm-10'>
+                        <input type='text' readonly class='form-control-plaintext' value='" . htmlspecialchars($fila['id_libro']) . "'>
+                    </div>
+                </div>
+
+                <div class='mb-3'>
+                    <label class='form-label fw-bold'>Nombre del libro</label>
+                    <input type='text' class='form-control' name='nombre_libro' value='" . htmlspecialchars($fila['nombre_libro']) . "' required>
+                </div>
+
+                <div class='mb-3'>
+                    <label class='form-label fw-bold'>Autor</label>
+                    <input type='text' class='form-control' name='autor' value='" . htmlspecialchars($fila['autor']) . "' required pattern='[A-Za-záéíóúÁÉÍÓÚñÑ ]+'>
+                </div>
+
+                <div class='mb-3'>
+                    <label class='form-label fw-bold'>Descripción</label>
+                    <textarea class='form-control' name='descripcion' rows='3' required>" . htmlspecialchars($fila['descripcion']) . "</textarea>
+                </div>
+
+                <div class='mb-3'>
+                    <label class='form-label fw-bold'>Género(s)</label>
+                    <input type='text' readonly class='form-control-plaintext' value='" . htmlspecialchars($fila['generos']) . " (No editable aquí)'>
+                </div>
+
+                <div class='mb-3 row'>
+                    <label class='col-sm-2 col-form-label fw-bold'>Portada Actual</label>
+                    <div class='col-sm-10'>
+                        <img src='" . htmlspecialchars($fila['imagen_ruta']) . "' alt='Portada' class='img-thumbnail' style='max-width: 150px;'>
+                    </div>
+                </div>
+
+                <div class='mb-3'>
+                    <label class='form-label fw-bold'>Cambiar imagen (opcional)</label>
+                    <input type='file' class='form-control' name='imagen' accept='image/*'>
+                </div>
+
+                <button type='submit' name='actualizar' class='btn btn-primary'>Guardar Cambios</button>
             </form>
             ";
         } else {
@@ -151,7 +155,7 @@ if (isset($_POST['actualizar'])) {
     ?>
 
     <br><br>
-    <button onclick="window.location.href='EditarEliminar.php'">Volver a la Búsqueda</button>
+    <button class="btn btn-secondary" onclick="window.location.href='EditarEliminar.php'">Volver a la Búsqueda</button>
 
 </body>
 </html>

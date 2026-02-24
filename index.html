@@ -10,10 +10,11 @@
 </head>
 
 <body class="bodyLogin">
-    <div class="container-md">
-        <div class="row g-2"></div>
-            <div class="col-md">
-                <form action="ValidationData/validate_sesion.php" method="POST" class="formulario">
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-12 col-md-8 col-lg-5">
+                <form action="ValidationData/validate_sesion.php" method="POST"
+                    class="formulario p-4 shadow rounded bg-white">
                     <h1>Iniciar sesión</h1>
                     <br>
                     <div class="mb-3">
@@ -28,47 +29,159 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Ingresar</button>
                     <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+
+                    <button class="btn facebook" type="button"
+                        onclick="FB.login(checkLoginState, {scope: 'public_profile,email'});">
+                        <svg viewBox="0 0 16 16" class="bi bi-facebook" fill="currentColor" height="16" width="16"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z">
+                            </path>
+                        </svg>
+                        Facebook
+                    </button>
+
+                    <br><br>
+                    <div id="g_id_onload" data-client_id="918934300769-ee967b1l7cfc53462rrahs7j5bmu6a17.apps.googleusercontent.com"
+                        data-callback="handleCredentialResponse">
+                    </div>
+                    <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
+                        data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
+                    </div>
+
                     <br><br>
                     <figcaption class="blockquote-footer">
-                        O continuar con<cite title="Source Title"></cite>
+                        Aún no tienes una cuenta? <cite title="Source Title"></cite>
                     </figcaption>
-                    <br>
-
-                    <div class="row g-4">
-                        <button class="btn google" type="button">
-                            <svg version="1.1" width="20" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
-                                style="enable-background:new 0 0 512 512;" xml:space="preserve">
-                                <path style="fill:#FBBB00;" d="M113.47,309.408L95.648,375.94l-65.139,1.378C11.042,341.211,0,299.9,0,256
-                            c0-42.451,10.324-82.483,28.624-117.732h0.014l57.992,10.632l25.404,57.644c-5.317,15.501-8.215,32.141-8.215,49.456
-                            C103.821,274.792,107.225,292.797,113.47,309.408z"></path>
-                                <path style="fill:#518EF8;"
-                                    d="M507.527,208.176C510.467,223.662,512,239.655,512,256c0,18.328-1.927,36.206-5.598,53.451
-                            c-12.462,58.683-45.025,109.925-90.134,146.187l-0.014-0.014l-73.044-3.727l-10.338-64.535
-                            c29.932-17.554,53.324-45.025,65.646-77.911h-136.89V208.176h138.887L507.527,208.176L507.527,208.176z"></path>
-                                <path style="fill:#28B446;" d="M416.253,455.624l0.014,0.014C372.396,490.901,316.666,512,256,512
-                            c-97.491,0-182.252-54.491-225.491-134.681l82.961-67.91c21.619,57.698,77.278,98.771,142.53,98.771
-                            c28.047,0,54.323-7.582,76.87-20.818L416.253,455.624z"></path>
-                                <path style="fill:#F14336;" d="M419.404,58.936l-82.933,67.896c-23.335-14.586-50.919-23.012-80.471-23.012
-                            c-66.729,0-123.429,42.957-143.965,102.724l-83.397-68.276h-0.014C71.23,56.123,157.06,0,256,0
-                            C318.115,0,375.068,22.126,419.404,58.936z"></path>
-                            </svg>
-                            Google
-                        </button>
-                        <button class="btn facebook" type="button">
-                            <svg viewBox="0 0 16 16" class="bi bi-facebook" fill="currentColor" height="16" width="16"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z">
-                                </path>
-                            </svg>
-                            Facebook
-                        </button>
-                    </div>
+                    <a href="register.php">Haz clic aqui para registrarse</a>
+                    <footer class="text-center mt-4 mb-3">
+                        <p class="small text-muted">
+                            &copy; 2024 BookLook.<br>
+                            <a href="pages/condiciones.html" class="text-decoration-none">Términos y Condiciones</a> |
+                            <a href="pages/politicas.html" class="text-decoration-none">Políticas de Privacidad</a> |
+                            <a href="pages/eliminación_datos.html" class="text-decoration-none">Eliminación de Datos</a>
+                        </p>
+                    </footer>
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '918938267254848',
+                cookie: true,
+                xfbml: true,
+                version: 'v24.0'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/es_LA/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        // Esta función se llama cuando el usuario hace clic en el botón de FB.
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        }
+
+        // Esta función maneja el estado de la sesión.
+        function statusChangeCallback(response) {
+            if (response.status === 'connected') {
+                // El usuario está logueado en Facebook y en tu app.
+                // Obtenemos sus datos y los enviamos al servidor.
+                console.log('Conectado y autorizado!');
+
+                fetchFacebookUserInfo();
+            } else {
+                // El usuario no está logueado en Facebook, así que no sabemos si está en tu app.
+                // O puede que haya cancelado el login.
+                console.log('No conectado a Facebook o no autorizado.');
+            }
+        }
+
+        // Función para obtener la información del usuario de Facebook
+        function fetchFacebookUserInfo() {
+            FB.api('/me', { fields: 'name,email,picture.width(200).height(200)' }, function (userInfo) {
+                if (userInfo && !userInfo.error) {
+                    enviarDatosAServidor(userInfo);
+                } else {
+                    console.error('Error al obtener datos de Facebook:', userInfo.error);
+                    alert('No se pudieron obtener tus datos de Facebook. Por favor, intenta de nuevo.');
+                }
+            });
+        }
+
+        // Función para enviar los datos al backend de tu aplicación
+        function enviarDatosAServidor(userInfo) {
+            const datosUsuario = {
+                nombre: userInfo.name,
+                email: userInfo.email,
+                facebook_id: userInfo.id,
+                foto: userInfo.picture.data.url
+            };
+
+            // Apuntamos al script PHP correcto
+            fetch('ValidationData/guardar_usuariofb.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datosUsuario)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        // ¡Éxito! Redirigimos a la página principal correcta
+                        window.location.href = "pages/menu.php";
+                    } else {
+                        // Mostramos un error más específico si el backend lo envía
+                        let errorMsg = data.error ? data.error : "Error al procesar el inicio de sesión.";
+                        alert(errorMsg);
+                        console.error('Error del servidor:', errorMsg);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error en la comunicación con el servidor:', error);
+                    alert("Hubo un problema de conexión. Revisa la consola para más detalles.");
+                });
+        }
+    </script>
+
+    <!-- Librería de Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <!-- Lógica para manejar la respuesta de Google -->
+    <script>
+        function handleCredentialResponse(response) {
+            // Enviamos el token (JWT) a nuestro backend PHP
+            fetch('ValidationData/guardar_usuariogoogle.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ token: response.credential })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = "pages/menu.php";
+                } else {
+                    alert(data.error || "Error al iniciar sesión con Google");
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
 </body>
 
 </html>
